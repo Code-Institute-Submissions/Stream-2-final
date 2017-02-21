@@ -1,0 +1,31 @@
+{% extends "index.html" %}
+{% block header_js %}
+    <script src="http://d3js.org/d3.v3.min.js" type="text/javascript"></script>
+    <script src="./static/lib/js/crossfilter.js" type="text/javascript"></script>
+    <script src="./static/lib/js/d3.js" type="text/javascript"></script>
+    <script src="./static/lib/js/dc.js" type="text/javascript"></script>
+    <script src="./static/lib/js/queue.js" type="text/javascript"></script>
+    <script src="./static/lib/js/keen.min.js" type="text/javascript"></script>
+    <script src="./static/js/map.js" type="text/javascript"></script>
+    <script src="./static/js/intro.js" type="text/javascript"></script>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="table-responsive">
+            <div class="chart-wrapper">
+                <div class="chart-title">
+                           <h1>Donations by State Map</h1>
+                </div>
+                <div class="chart-stage text-center">
+                    <div class="loading">
+                        <h2>The Map Is Loading - Please Allow 10 Seconds</h2>
+                    </div>
+                    <div class="text-center" id="states-map" data-step="1" data-intro="This map of the USA shows the number of donations to the charity for each state.  Simply mouse over the state to view the number of donations for that state." data-position="right"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

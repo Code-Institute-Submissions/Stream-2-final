@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <title>School Donations Dashboard</title>
+   <link rel="stylesheet" href="./static/lib/css//bootstrap.min.css" />
+   <link rel="stylesheet" href="./static/lib/css/keen-dashboards.css" />
+   <link rel="stylesheet" href="./static/lib/css/dc.css" />
+   <link rel="stylesheet" href="./static/css/custom.css" />
+   <link rel="stylesheet" href="./static/css/introjs.css" />
+   <script src="./static/lib/js/jquery.min.js"></script>
+   <script src="./static/lib/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <script>
+       $(document).ready(function() {
+           $('#addComments').click(function() {
+                $.ajax({
+                    url: '/add_comments',
+                    data: $('form').serialize(),
+                    type: 'POST',
+                    success: function(response) {
+                    if (response != '' ){
+                        $('#addComments').hide();
+                        $('#responseText').text('Your comments have been submitted');
+                    }
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+           });
+
+           $('#viewDashBoard').click(function() {
+              window.location = '/SDD';
+           });
+
+           var pathname = window.location.pathname;
+           if (pathname == '/SDD') {
+                $('#tourButton').show();
+            } else if (pathname == '/map') {
+                $('#tourButton').show();
+            } else {
+                $('#tourButton').hide();
+            }
+
+           $('#btnAdminLogout').click(function() {
+           $.ajax({
+                    url: '/clearSession',
+                    data: $('#loginForm').serialize(),
+                    type: 'POST',
+                    success: function(response) {
+                        console.log(response);
+                        if (response != '') {
+                            $('#btnAdminLogout').hide();
+                            $('#responseTextLog').text(response);
+                        }
+                    },
+                    error: function(error) {
+                    console.log(error);
+                    }
+           });
+           });
+
+           $('#btnAdminLogin').click(function() {
+                $.ajax({
+                    url: '/login',
+                    data: $('#loginForm').serialize(),
+                    type: 'POST',
+                success: function(response) {
+                console.log(response);
+                if (response != '' ){
+                    $('#btnAdminLogin').hide();
+                    $('#responseTextLog').text(response);
+                }
+                },
+                error: function(error) {
+                console.log(error);
+                }
+                });
+            });
+       });
+   </script>
+{% block header_js %}
+{% endblock %}
+</head>
+<body>
+<header>
+     <nav class="navbar navbar-inverse">
+    <!--html 5 nav bootstrap navbar -->
+        <div class="nav navbar-header">
+            <a class="navbar-brand" href="./">School Donations Dashboard</a>
+            <button class="btn btn-primary outline" type="button" id="tourButton" onclick="javascript:introJs().start();">Start Tour!</button>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myCollapsingList">
+            <span class="sr-only">Toggle Navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="myCollapsingList">
+        <a id="top"></a>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a data-toggle="collapse" data-target=".navbar-collapse" href="./">Home</a></li>
+                <li><a data-toggle="modal" data-target="#myModal">Feedback</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More Information <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a data-toggle="collapse" data-target=".navbar-collapse" href="./SDD">School Donations Dashboard</a></li>
+                        <li><a data-toggle="collapse" data-target=".navbar-collapse" href="./map">School Donations Map</a></li>
+                        <li><a data-toggle="collapse" data-target=".navbar-collapse" href="./view_comments">View Comments</a></li>
+                        <li><a data-toggle="modal" data-target="#adminLogin">Admin Login</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<div class="modal fade" id="adminLogin" tabindex="-1" aria-labelledby="enquiry-form-modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1>Admin Login</h1>
+                <form class="form-signin" action="/login" method="post" id="loginForm">
+                    <div class="row">
+                        <div class="col-md-4"><label>User Name: </label></div>
+                        <div class="col-md-8"><input class="form-control" type="text" name="username" /></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"><label>Password: </label></div>
+                        <div class="col-md-8"><input class="form-control" type="password" name="password" /></div>
+                    </div>
+                    <div class="row">
+                        <div class="modal-footer">
+                            <span id="responseTextLog"></span>
+                            <button type="button" id="btnAdminLogin" class="btn btn-primary">Login</button>
+                            <button type="button" id="btnAdminLogout" class="btn btn-primary">Log Out</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal2" tabindex="-1" aria-labelledby="enquiry-form-modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1>Submitted</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="enquiry-form-modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <form class="form-signin" action="/signUp" method="post">
+                    <h2 class="form-signin-heading">Please Make Your Comments: </h2>
+                    <div class="row">
+                        <div class="col-md-4"><label>First Name: </label></div>
+                        <div class="col-md-8"><input class="form-control" type="text" name="firstname" /></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"><label>Last Name: </label></div>
+                        <div class="col-md-8"><input class="form-control" type="text" name="lastname" /></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"><label>Email: </label></div>
+                        <div class="col-md-8"><input class="form-control" type="email" name="email" placeholder="Email address" required /></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"><label>Comments: </label></div>
+                        <div class="col-md-8"><textarea rows="4" cols="50" name="comments" required></textarea></div>
+                    </div>
+                    <div class="row">
+                        <div class="modal-footer">
+                            <span id="responseText"></span>
+                            <button type="button" id="addComments" class="btn btn-primary">Submit Your Comments</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="enquiry-modal" tabindex="-1" aria-labelledby="enquiry-form-modal" aria-hidden="true">
+<!-- Bootstrap modal popup which includes the angular form-->
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h2 class="modal-title" id="enquiry-form-modal">Comments Form</h2>
+                <p>Please fill out as much detail as you can, including your email address.</p>
+            </div>
+            <div class="modal-body">
+                <form class="form-signin" action="/signUp" method="post">
+                    <div class="row">
+                        <div class="col-md-4"><label>First Name: </label></div>
+                        <div class="col-md-8"><input class="form-control" type="text" name="firstName" /></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"><label>Last Name: </label></div>
+                        <div class="col-md-8"><input class="form-control" type="text" name="lastName" /></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"><label>Email: </label></div>
+                        <div class="col-md-8"><input class="form-control" type="email" name="email" required /></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"><label>Comments: </label></div>
+                        <div class="col-md-8"><textarea rows="4" cols="50" name="comments" required></textarea></div>
+                    </div>
+                    <div class="row">
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Submit Enquiry</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% block content %}
+{% endblock %}
+</body>
+</html>

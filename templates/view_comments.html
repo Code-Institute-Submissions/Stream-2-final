@@ -1,0 +1,44 @@
+{% extends "index.html" %}
+{% block header_js %}
+<script>
+$(document).ready(function() {
+    var sessionStr = $('#sessionStr').text();
+    console.log(sessionStr);
+    if (sessionStr == 'None')
+    {
+        $('.glyphicon').hide();
+    }
+    else
+    {
+        $('.glyphicon').show();
+        $('#btnAdminLogout').show();
+    }
+});
+</script>
+{% endblock %}
+{% block content %}
+<p id="sessionStr">{{ sessionStr }}</p>
+<div class="container">
+    <h2>User Feedback on the School Donations Dashboard</h2>
+    <p>Please share with us your thoughs on the users dashboard.  Please be aware of our <a href="/termsandconditions">terms of use</a> and privacy policy.</p>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th colspan="2">Commemnts</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for comment in CommentsSTR %}
+                <tr>
+                    <td>{{ comment.FirstName }} {{ comment.LastName }} </td>
+                    <td>{{ comment.Comments }}</td>
+                    <td><a href="/view_comment?comment={{ comment._id }}"><span class="glyphicon glyphicon-trash"></span></a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

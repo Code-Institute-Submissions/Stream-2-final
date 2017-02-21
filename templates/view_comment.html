@@ -1,0 +1,72 @@
+{% extends "index.html" %}
+{% block header_js %}
+<script>
+   $(document).ready(function() {
+       //btnAdminLogout
+       $('#btnDelete').click(function () {
+           $.ajax({
+               url: '/delete_comments',
+               data: $('form').serialize(),
+               type: 'POST',
+               success: function (response) {
+                   console.log(response);
+                   if (response != '') {
+                       //console.log(response);
+                       $('#btnDelete').hide();
+                       $('#btnEdit').hide();
+                       $('#responseDelText').text("This comment has been deleted" );
+                   }
+
+               },
+               error: function (error) {
+                   console.log(error);
+               }
+           });
+       });
+       $('#btnEdit').click(function () {
+           $.ajax({
+               url: '/edit_comments',
+               data: $('form').serialize(),
+               type: 'POST',
+               success: function (response) {
+                   if (response != '') {
+                       $('#responseDelText').text("This comment has been edited" );
+                   }
+               },
+               error: function (error) {
+                   console.log(error);
+               }
+           });
+       });
+   });
+</script>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <h2>Edit / Delete this comment</h2>
+    <form class="form-delete" action="/delete_comments" method="post" id="deleteForm">
+         <input type="hidden" name="hidCommentID" value="{{ commentID }}" id="hidCommentID" />
+         <div class="row">
+            <div class="col-md-4"><label>First Name: </label></div>
+            <div class="col-md-8"><input class="form-control" type="text" name="editfirstname" value="{{ strcomment.FirstName }}" /></div>
+         </div>
+         <div class="row">
+            <div class="col-md-4"><label>Last Name: </label></div>
+            <div class="col-md-8"><input class="form-control" type="text" name="editlastname" value="{{ strcomment.LastName }}" /></div>
+         </div>
+         <div class="row">
+            <div class="col-md-4"><label>Email: </label></div>
+            <div class="col-md-8"><input class="form-control" type="email" name="editemail" placeholder="Email address" value="{{ strcomment.Email }}" /></div>
+         </div>
+         <div class="row">
+            <div class="col-md-4"><label>Comments: </label></div>
+            <div class="col-md-8"><textarea rows="4" cols="50" name="editcomments" required>{{ strcomment.Comments }}</textarea></div>
+         </div>
+         <button type="button" id="btnDelete" class="btn btn-primary">Delete</button>
+         <button type="button" id="btnEdit" class="btn btn-primary">Edit</button>
+         <a href="/view_comments" class="btn btn-primary">Cancel</a>
+         <div id="responseDelText"></div>
+         <div><a href="/view_comments">Return to Comments list</a></div>
+    </form>
+</div>
+{% endblock %}

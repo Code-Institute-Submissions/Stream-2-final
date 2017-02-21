@@ -19,13 +19,16 @@ Data has been taken from DonorsChoose.org, a US based nonprofit organization tha
 - [Python Flask] (http://flask.pocoo.org/) A Micro Framework for Python.
 - [MongoDB](https://www.mongodb.com/) A NoSQL Database Technology used for building modern applications.
 - [D3.js](https://d3js.org/) A JavaScript library for manipulating documents based on data. D3 helps you bring data to life using HTML, SVG, and CSS
-- [DC.js] (https://dc-js.github.io/dc.js/) is a javascript charting library with native crossfilter support, allowing highly efficient exploration on large multi-dimensional datasets. It leverages d3 to render charts in CSS-friendly SVG format.
-
+- [DC.js](https://dc-js.github.io/dc.js/) is a javascript charting library with native crossfilter support, allowing highly efficient exploration on large multi-dimensional datasets. It leverages d3 to render charts in CSS-friendly SVG format.
+- [Crossfilter.js](http://square.github.io/crossfilter/) Crossfilter is a JavaScript library for exploring large multivariate datasets in the browser.
+- [Queue.js](https://github.com/d3/d3-queue) A JavaScript library for running asynchronous tasks with configurable concurrency.
+- [Keen.js](https://github.com/keen/dashboards) Responsive dashboard templates for Bootstrap
+- [Intro.js](http://introjs.com/) A JavaScript library that gives new feature introduction and step-by-step users guide for your website and project.
 
 ##Pages in Detail
 
 #Home Page
-(https://arnold-j83.github.io/Stream-1-final/#/home) Is a straight forward HTML5 page which summarises the facilities and provides link into the site.
+(http://dry-wildwood-54859.herokuapp.com/) Is a straight forward HTML5 Bootstrap page which summarises the projects and provides links.  The home page also features a Map of the USA, when you mouse-over a state, it highlights the number of donations to DonorsChoose.org from that state  .
 
 #About Location Page
 (https://arnold-j83.github.io/Stream-1-final/#/about) Provides more information about the Apartment and surrounding area.  This page features a JQuery Carousel displaying revolving pictures of the the Apartment and surrounding area.  This page also features an Angular Directive makeMap, whcih call the Google Map API for maps of key pouints of interest within the area.

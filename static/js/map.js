@@ -226,23 +226,32 @@
              }
            })
            .on("mouseover", function (d) {
+             if (d.properties.donations == null)
+             {
+               d.properties.donations = "No Data Available";
+             }
              var bodyNode = d3.select('#states-map').node();
              var absoluteMousePos = d3.mouse(bodyNode);
              div.transition()
                  .duration(200)
                  .style("opacity", .9);
-             div.text(d.properties.name + ' ' + d.properties.donations)
+             div.text(d.properties.name + ' - ' + d.properties.donations)
                  .style("left", (absoluteMousePos[0] + 30) + 'px')
                  .style("top", (absoluteMousePos[1] - 50) + 'px');
 
            })
            .on("mousemove", function (d) {
+             if (d.properties.donations == null)
+             {
+               d.properties.donations = "No Data Available";
+             }
              var bodyNode = d3.select('#states-map').node();
              var absoluteMousePos = d3.mouse(bodyNode);
              div.transition()
                  .duration(200)
                  .style("opacity", .9);
-             div.text(d.properties.name + ' ' + d.properties.donations)
+                 .style
+             div.text(d.properties.name + ' - ' + d.properties.donations)
                  .style("left", (absoluteMousePos[0] + 30) + 'px')
                  .style("top", (absoluteMousePos[1] - 50) + 'px');
 

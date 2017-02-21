@@ -31,7 +31,7 @@ Please note: The total number of records is restricted to 42,134 records and rep
 (http://dry-wildwood-54859.herokuapp.com/) Is a straight forward HTML5 Bootstrap page which summarises the projects and provides links.  The home page also features a Map of the USA, when you mouse-over a state, it highlights the number of donations to DonorsChoose.org from that state.
 
 #The School Donations Dashboard
-(http://dry-wildwood-54859.herokuapp.com/SDD) Features the dashboard of charts including bar Charts, Line Charts and Pei Charts.  Data is aggregated using crossfilter and rendered using dc.  The start Tour button in the top nav bar launches Intro.js, and highlighs each chart element and gives an introduction for what the chart represents.
+(http://dry-wildwood-54859.herokuapp.com/SDD) Features the dashboard of charts including bar Charts, Line Charts and Pie Charts.  Data is aggregated using crossfilter and rendered using dc.js.  The Start Tour button in the top nav bar launches Intro.js, and highlighs each chart element and gives an introduction for what the chart represents.
 
 #Donations by State Map
 (http://dry-wildwood-54859.herokuapp.com/map) Shows the map of the USA, when you mouse-over a state it gives the number of donations for that state.

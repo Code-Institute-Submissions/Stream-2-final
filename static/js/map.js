@@ -250,7 +250,6 @@
              div.transition()
                  .duration(200)
                  .style("opacity", .9);
-                 .style
              div.text(d.properties.name + ' - ' + d.properties.donations)
                  .style("left", (absoluteMousePos[0] + 30) + 'px')
                  .style("top", (absoluteMousePos[1] - 50) + 'px');
